@@ -1,0 +1,28 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}Books{% endblock title %}
+
+{% block content %}
+
+<!-- Masthead-->
+<header class="booklist">
+    <div class="container">
+    <br/>
+        <h1>This is our book's list</h1>
+        <br/>
+
+        <div class="row">
+            {% for book in book_list %}
+            <div class="col-lg-4 col-sm-6 mb-4">
+                <h2><a href="{{ book.get_absolute_url }}">
+                    <img class="bookcover" src="{{ book.cover.url}}" alt="{{ book.title }}"></a></h2>
+            </div>
+            {% endfor %}
+        </div>
+        <br/><br/>
+    </div>
+
+</header>
+
+{% endblock content %}

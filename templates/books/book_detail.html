@@ -1,0 +1,83 @@
+{% extends '_base.html' %}
+
+{% block title %}{{ book.title }}{% endblock title %}
+
+{% load i18n %}
+
+{% block content %}
+  <div class="book-detail">
+    <h3>{{ book.title }}</h3>
+    <br/>
+    {% if book.cover %}
+    <img class="bookcover" src="{{ book.cover.url}}" alt="{{ book.title }}">
+    {% endif %}
+
+    <br/>
+    <br/><a>Author: {{ book.author }}</a>
+    <br/><a>Price: {{ book.price }}</a>
+  </div>
+
+<div class="container">
+  <div class="book-review">
+
+    <h3>Reviews:</h3>
+    <a href="{% url 'review_new' book.pk %}">
+      <button type="button" class="btn btn-outline-primary">{% trans "Add" %}</button>
+    </a>
+    <br/><br>
+
+    {% if not book.reviews.all %}
+
+      No reviews yet...
+
+    {% else %}
+
+      {% for review in book.reviews.all %}
+
+        {% if not user == review.author %}
+
+          <div class="card">
+            <div class="card-header">
+
+              <span class="text-muted">
+                By: <strong>{{ review.author }}</strong>
+                | Published on <strong>{{ review.date_added|date:"j.m.Y"}}</strong>
+                at <strong>{{ review.date_added|date:"H:i"}}</strong>
+              </span>
+            </div>
+
+            <div class="card-body">
+              <p>{{ review.review }}</p>
+            </div>
+          </div>
+        {% else %}
+
+          <div class="card">
+            <div class="card-header">
+
+              <span class="text-muted">
+                By: <strong>{{ review.author }}</strong>
+                | Published on <strong>{{ review.date_added|date:"j.m.Y"}}</strong>
+                at <strong>{{ review.date_added|date:"H:i" }}</strong> |
+
+                <a href="{% url 'review_delete' review.pk %}">
+                  <button class="btn btn-danger btn-sm py-0" style="font-size: 0.8em;" type="submit">{% trans "Delete" %}</button>
+                </a>
+              </span>
+            </div>
+
+            <div class="card-body">
+              <p>{{ review.review }}</p>
+            </div>
+          </div>
+
+        {% endif %}
+
+
+      {% endfor %}
+
+    {% endif %}
+  </div>
+</div>
+
+{% endblock content %}
