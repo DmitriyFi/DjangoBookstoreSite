@@ -80,9 +80,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "d2dvk6a3fkuspp",
-        "USER": "qwzwcckomctbvl",
-        "PASSWORD": "f0e33b257d818378f3a2f21b2895d851e2780bdc6de652fb853525e32045f4e3",
+        "NAME": "degthi9jks8jp1",
+        "USER": "zaecuspqiqvjcp",
+        "PASSWORD": "037e6f83e3fa8aa17c442af227d12100588c3390587cc2003dd804e2d6b5c436",
         "HOST": "ec2-52-207-15-147.compute-1.amazonaws.com",  # heroku generated host
         "PORT": 5432,  # default postgres port
     }
