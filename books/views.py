@@ -15,12 +15,11 @@ class BookListView(ListView):
     login_url = 'account_login'
 
 
-class BookDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
+class BookDetailView(LoginRequiredMixin, DetailView):
     model = Book
     context_object_name = 'book'
     template_name = 'books/book_detail.html'
     login_url = 'account_login'
-    # permission_required = 'books.special_status'
 
 
 class ReviewCreateView(LoginRequiredMixin, CreateView):
