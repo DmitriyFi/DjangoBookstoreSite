@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -74,16 +76,29 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+# Heroku DB settings :
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": env("DB_NAME"),
-        "USER": env("DB_USER_NAME"),
-        "PASSWORD": env("DB_PASS"),
-        "HOST": "127.0.0.1",  # localhost
+        "NAME": "d2dvk6a3fkuspp",
+        "USER": "qwzwcckomctbvl",
+        "PASSWORD": "f0e33b257d818378f3a2f21b2895d851e2780bdc6de652fb853525e32045f4e3",
+        "HOST": "ec2-52-207-15-147.compute-1.amazonaws.com",  # heroku generated host
         "PORT": 5432,  # default postgres port
     }
 }
+
+# Localhost DB settings:
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql_psycopg2",
+#         "NAME": env("DB_NAME"),
+#         "USER": env("DB_USER_NAME"),
+#         "PASSWORD": env("DB_PASS"),
+#         "HOST": "127.0.0.1",  # localhost
+#         "PORT": 5432,  # default postgres port
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -122,7 +137,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
